@@ -6,7 +6,6 @@
 #include "mpu6050.h"
 //#include "24l01.h"
 #include "led.h"
-//#include "MOTOR_CONTROL.h"
 
 
 extern unsigned char tx_buffer[DMA_TX_LENGTH];
@@ -20,19 +19,19 @@ void Data_Receive_Anl(u8 *data_buf,uint16_t usart_flag)
 	float buf_4=0,buf_5=0,buf_6=0;
 	u8 buf[25]={0};
 
-	length=usart_flag&0x03ff;//»ñÈ¡ÓÐÐ§Êý¾Ý³¤¶È
+	length=usart_flag&0x03ff;//ï¿½ï¿½È¡ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
 	for(i=0;i<length;i++)
 	{
 		buf[i]=ASII_To_Char(data_buf+i);
 	}
 	
-	if((usart_flag&0x0800)==0)//Èç¹ûÊÇPID²ÎÊý
+	if((usart_flag&0x0800)==0)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½PIDï¿½ï¿½ï¿½ï¿½
 	{
-		buf_1=buf[1]*100+buf[2]*10+buf[3]+buf[5]/(float)10.0+buf[6]/(float)100.0;//Ö¡¸ñÊ½£ºAB¿Ú100.00¿Ú200.00¿Ú300.00E
+		buf_1=buf[1]*100+buf[2]*10+buf[3]+buf[5]/(float)10.0+buf[6]/(float)100.0;//Ö¡ï¿½ï¿½Ê½ï¿½ï¿½ABï¿½ï¿½100.00ï¿½ï¿½200.00ï¿½ï¿½300.00E
 		buf_2=buf[8]*100+buf[9]*10+buf[10]+buf[12]/(float)10.0+buf[13]/(float)100.0;
 		buf_3=buf[15]*100+buf[16]*10+buf[17]+buf[19]/(float)10.0+buf[20]/(float)100.0;
 		
-		if((usart_flag&(uint16_t)0x4000)!=0x00)//¹¦ÄÜ×Ö£¬PITCH
+		if((usart_flag&(uint16_t)0x4000)!=0x00)//ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½PITCH
 		{
 		
 
@@ -40,13 +39,13 @@ void Data_Receive_Anl(u8 *data_buf,uint16_t usart_flag)
 //  		printf("%7.3f\t%7.3f\t%7.3f\r\n",Pitchpid.kp,Pitchpid.ki,Pitchpid.kd);
 			
 		}
-		else if((usart_flag&(uint16_t)0x2000)!=0x00)//¹¦ÄÜ×Ö£¬ROLL
+		else if((usart_flag&(uint16_t)0x2000)!=0x00)//ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ROLL
 		{
 			
 			LED1_ON();
 // 			printf("%7.3f\t%7.3f\t%7.3f\r\n",Rollpid.kp,Rollpid.ki,Rollpid.kd);
 		}
-		else if((usart_flag&(uint16_t)0x1000)!=0x00)//¹¦ÄÜ×Ö£¬YAW
+		else if((usart_flag&(uint16_t)0x1000)!=0x00)//ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½YAW
 		{
 			
 			LED1_ON();
@@ -57,11 +56,11 @@ void Data_Receive_Anl(u8 *data_buf,uint16_t usart_flag)
 	}
 	else
 	{
-		buf_4=buf[1]*10000+buf[2]*1000+buf[3]*100+buf[4]*10+buf[5];//Ö¡¸ñÊ½£ºAB¿Ú100.00¿Ú200.00¿Ú300.00E
+		buf_4=buf[1]*10000+buf[2]*1000+buf[3]*100+buf[4]*10+buf[5];//Ö¡ï¿½ï¿½Ê½ï¿½ï¿½ABï¿½ï¿½100.00ï¿½ï¿½200.00ï¿½ï¿½300.00E
 		buf_5=buf[8]*10000+buf[9]*1000+buf[10]*100+buf[11]*10+buf[12];
 		buf_6=buf[15]*10000+buf[16]*1000+buf[17]*100+buf[18]*10+buf[19];
 
-		//ÓÍÃÅ pitch roll
+		//ï¿½ï¿½ï¿½ï¿½ pitch roll
 //		printf("%3.3f\t%3.3f\t%3.3f\r\n",Target.thottle,Target.pitch,Target.roll);
 		LED1_ON();
 	}
