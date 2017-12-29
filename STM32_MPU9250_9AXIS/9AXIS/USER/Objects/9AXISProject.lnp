@@ -1,0 +1,26 @@
+--cpu Cortex-M3
+".\objects\ins.o"
+".\objects\ahrs.o"
+".\objects\main.o"
+".\objects\stm32f10x_it.o"
+".\objects\system_stm32f10x.o"
+".\objects\myiic.o"
+".\objects\led.o"
+".\objects\mpu92xx.o"
+".\objects\spi.o"
+".\objects\timer.o"
+".\objects\delay.o"
+".\objects\sys.o"
+".\objects\usart.o"
+".\objects\core_cm3.o"
+".\objects\startup_stm32f10x_hd.o"
+".\objects\misc.o"
+".\objects\stm32f10x_gpio.o"
+".\objects\stm32f10x_spi.o"
+".\objects\stm32f10x_rcc.o"
+".\objects\stm32f10x_usart.o"
+".\objects\stm32f10x_tim.o"
+--library_type=microlib --strict --scatter ".\Objects\9AXISProject.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\9AXISProject.map" -o .\Objects\9AXISProject.axf
